@@ -4,5 +4,8 @@ module.exports = {
     },
     addProduct: function (req, res) {
         res.render('addProduct', { title: 'Express' });
+    },
+    productStore: function (req, res){
+        return res.send(req.body);
     }
 }

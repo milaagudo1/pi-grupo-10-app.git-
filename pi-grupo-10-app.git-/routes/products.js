@@ -1,11 +1,7 @@
 var express = require('express');
 var router = express.Router();
-let mainController = require('../controllers/productController');
-const productController = require('../controllers/productController');
+const controladorProductoDetalle = require('../controllers/productController');
 
-/* GET home page. */
-router.get('/', productController.productDetail );
-router.get('/add', productController.addProduct );
-router.post('/', productController.productStore );
-
+// Ruta para detalle de producto
+router.get('/detalle', controladorProductoDetalle.show);
 module.exports = router;

@@ -1,11 +1,18 @@
-module.exports = {
-    profile: function (req, res) {
-        res.render('profile', { title: 'Express' });
+const localData = require('../localData/localData');
+
+const controladorUsuarios = {
+    profile: function(req, res) {
+        return res.render("profile", { usuario: localData.usuario });
     },
-    login: function (req, res) {
-        res.render('login', { title: 'Express' });
+
+    login: function(req, res) {
+        return res.render("login");
     },
-    register: function (req, res) {
-        res.render('register', { title: 'Express' });
+
+    register: function(req, res) {
+        return res.render("register");
     }
 };
+
+module.exports = controladorUsuarios;
+

@@ -9,7 +9,7 @@
 						<img src="./images/logo-mercado-liebre.svg">
 					</a>
 				</div>
-	
+
 				<div class="col-7 col-md-6">
 					<form action="search-results.html" method="GET" class="search-form">
 						<input type="text" name="search" placeholder="Buscar productos, marcas y más"
@@ -17,7 +17,7 @@
 						<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
-	
+
 				<div class="col-12 col-md-4">
 					<a class="main-header_credit-link">
 						<i class="fas fa-hand-holding-usd"></i>
@@ -25,11 +25,11 @@
 					</a>
 				</div>
 			</div>
-	
+
 			<button class="btn-toggle-navbar">
 				<i class="fas fa-bars"></i>
 			</button>
-	
+
 			<nav class="main-navbar">
 				<ul class="left-navbar">
 					<li><a href="index.html">Todos los productos</a></li>
@@ -66,11 +66,22 @@
 				<h2 class="products-title">Registrate</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá va el formulario de registro. <br>
-			Debe cumplir con los puntos de la consigna y ser coherente con la tabla de la base de datos <br>
-			Eliminen estás líneas y coloquen el formulario. <br>
-			Recuerden todo lo que necesita tanto la etiqueta form como los campos input para operar correctamtente</i> <br>
-			////////////////
-			</h2>
-
+			<h2 class="col-12"> </h2>
+			<form action="./users/register" method="GET" class="register-form">
+				<div class="form-group">
+					<label for="usuario">Usuario:</label>
+					<input type="text" id="name" name="name" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Contraseña:</label>
+					<input type="password" id="password" name="password" class="form-control" required>
+				</div>
+				<button type="submit" class="btn btn-primary">Registrarse</button>
+			</form>
+		</div>
+	</div>
 <%- include('partials/footer') %>

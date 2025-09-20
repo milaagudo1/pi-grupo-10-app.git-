@@ -21,8 +21,31 @@ const controladorAddProduct = {
     }
 };
 
+const controladorProductoEdicion = {
+    edit: function(req, res) {
+        let id = req.params.id; 
+        let indice = id - 1; 
+        let product = localData.productos[indice]; 
+        if (!product) {
+            return res.send("No existe un producto con ese ID");
+        }
+        // Si vienen datos por query, actualizamos y redirigimos
+        if (req.query.nombre || req.query.precio) {
+            if (req.query.nombre) product.nombre = req.query.nombre;
+            if (req.query.precio) product.precio = req.query.precio;
+
+            return res.redirect('/products/results'); // o a detalle del producto
+        }
+
+        // Si no vienen datos, solo renderizamos el formulario
+        return res.render("/products/results");
+     }
+};
+
+
 module.exports = {
     show: controladorProductoDetalle.show,
     results: controladorProductoBusqueda.results,
-    add: controladorAddProduct.add
+    add: controladorAddProduct.add,
+   edit: controladorProductoEdicion.edit
 };

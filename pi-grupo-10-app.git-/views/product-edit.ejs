@@ -6,7 +6,7 @@
 			<div class="row align-items-center">
 				<div class="col-5 col-md-2">
 					<a href="/" class="main-header_home-link">
-						<img src="./images/logo-mercado-liebre.svg">
+						<img src="/images/logo.png">
 					</a>
 				</div>
 	
@@ -61,16 +61,47 @@
 
 	<!-- Novedades -->
 	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Editar datos del producto</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá va el formulario para modificar datos de un producto del catálogo. <br>
-			Debe cumplir con los puntos de la consigna y ser coherente con la tabla de la base de datos. <br>
-			Eliminen estás líneas y coloquen el formulario. <br>
-			Recuerden todo lo que necesita tanto la etiqueta form como los campos input para operar correctamtente</i> <br>
-			////////////////
-			</h2>
+    <div class="row">
+        <div class="col-12">
+            <h2 class="products-title">Editar datos del producto</h2>
+        </div>
 
+        <div class="col-12">
+            <form action="/products/update/<%= product.id %>" method="GET" enctype="multipart/form-data" class="edit">
+                <!-- ID oculto -->
+                <input type="hidden" name="id" value="<%= product.id %>">
+
+                <!-- Nombre -->
+                <div class="form-group mb-3">
+                    <label for="nombre">Nombre del producto</label>
+                    <input type="text" id="nombre" name="nombre" value="<%= product.nombre %>" class="form-control" required>
+                </div>
+
+                <!-- Descripción -->
+                <div class="form-group mb-3">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="3" class="form-control" required><%= product.descripcion %></textarea>
+                </div>
+
+                <!-- Imagen actual -->
+                <div class="form-group mb-3">
+                    <label>Imagen actual:</label><br>
+                    <img src="/images/products/<%= product.imagen %>" alt="<%= product.nombre %>" class="img-thumbnail" style="max-width:150px;">
+                </div>
+
+                <!-- Subir nueva imagen -->
+                <div class="form-group mb-3">
+                    <label for="imagen">Cambiar imagen del producto</label>
+                    <input type="file" id="imagen" name="imagen" class="form-control">
+                </div>
+
+                <!-- Botón -->
+                <div class="form-group text-end">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+	
 <%- include('partials/footer') %>

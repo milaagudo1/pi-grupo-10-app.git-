@@ -1,15 +1,15 @@
 
 const localData = {
   usuario: {
-    email: "usuario@email.com",
-    usuario: "UsuarioEjemplo",
+    email: "paezcamila@email.com",
+    usuario: "CamilaPaez",
     contraseña: "123456",
     avatar: "avatar1.jpg" // nombre del archivo de la imagen del usuario
   },
   productos: [
     {
       id: 1,
-      imagen: "producto1.jpg",  // en la vista ejs tengo que indicar la ruta correspondiente 
+      imagen: "notebook-gamer.webp",  // en la vista ejs tengo que indicar la ruta correspondiente 
       nombre: "Notebook Gamer",
       descripcion: "Notebook con 16GB RAM, 512GB SSD y tarjeta gráfica dedicada.",
       comentarios: [
@@ -19,7 +19,7 @@ const localData = {
     },
     {
       id: 2,
-      imagen: "producto2.jpg",
+      imagen: "auriculares.webp",
       nombre: "Auriculares Inalámbricos",
       descripcion: "Auriculares Bluetooth 5.0 con cancelación de ruido activa.",
       comentarios: [
@@ -29,7 +29,7 @@ const localData = {
     },
     {
       id: 3,
-      imagen: "producto3.jpg",
+      imagen: "mouse.webp",
       nombre: "Mouse Gamer RGB",
       descripcion: "Mouse con sensor de alta precisión y luces RGB personalizables.",
       comentarios: [
@@ -38,7 +38,7 @@ const localData = {
     },
     {
       id: 4,
-      imagen: "producto4.jpg",
+      imagen: "teclado.webp",
       nombre: "Teclado Mecánico",
       descripcion: "Teclado mecánico con switches táctiles y retroiluminación LED.",
       comentarios: [
@@ -47,7 +47,7 @@ const localData = {
     },
     {
       id: 5,
-      imagen: "producto5.jpg",
+      imagen: "monitor.webp",
       nombre: "Monitor 27\" 144Hz",
       descripcion: "Monitor Full HD de 27 pulgadas con tasa de refresco de 144Hz.",
       comentarios: [
@@ -56,7 +56,7 @@ const localData = {
     },
     {
       id: 6,
-      imagen: "producto6.jpg",
+      imagen: "consolaVideojuegos.webp",
       nombre: "Consola de Videojuegos",
       descripcion: "Consola de última generación con gráficos en 4K.",
       comentarios: [
@@ -65,7 +65,7 @@ const localData = {
     },
     {
       id: 7,
-      imagen: "producto7.jpg",
+      imagen: "sillaGamer.webp",
       nombre: "Silla Gamer",
       descripcion: "Silla ergonómica con soporte lumbar y reclinable.",
       comentarios: [
@@ -74,7 +74,7 @@ const localData = {
     },
     {
       id: 8,
-      imagen: "producto8.jpg",
+      imagen: "webCam.webp",
       nombre: "Webcam HD",
       descripcion: "Webcam con resolución 1080p ideal para streaming y reuniones.",
       comentarios: [
@@ -83,7 +83,7 @@ const localData = {
     },
     {
       id: 9,
-      imagen: "producto9.jpg",
+      imagen: "discoSSD.webp",
       nombre: "Disco SSD 1TB",
       descripcion: "Disco sólido con gran velocidad de lectura y escritura.",
       comentarios: [
@@ -92,7 +92,7 @@ const localData = {
     },
     {
       id: 10,
-      imagen: "producto10.jpg",
+      imagen: "auricularesMicrofo.webp",
       nombre: "Auriculares con Micrófono",
       descripcion: "Auriculares con micrófono integrado, ideales para gaming y llamadas.",
       comentarios: [

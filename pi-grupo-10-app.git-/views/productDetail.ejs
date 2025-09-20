@@ -6,8 +6,8 @@
 			<div class="row align-items-center">
 				<div class="col-5 col-md-2">
 					<a href="/" class="main-header_home-link">
-						<img src="/images/logo-mercado-liebre.svg">
-					</a>
+						<img src="/images/logo.png">
+					</a>      
 				</div>
 	
 				<div class="col-7 col-md-6">
@@ -60,65 +60,30 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title">Nombre del producto</h2> 
-			<p class="product-detail-description">
-				<a href="./product/">Editar</a>
-			</p>
+		<h2 class="products-title"><%= producto.nombre %></h2>
+<p class="product-detail-description"><%= producto.descripcion %></p>	
 		</div>
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="./images/products/default-image.png" alt="" class="product-detail-img">
-					<p class="product-detail-description">
-						Descripción corta del producto. En la página principal solo se ven 2 líneas de estar descripción.Lorem ipsum dolor,
-						sit amet consectetur adipisicing elit. Tae ipsam amet eum, totam dolore libero illo unde? Consectetur dolorem neque
-						veritatis.</p>
+					<img src="/images/products/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="product-detail-img">
+					<p class="product-detail-description"><%= producto.descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<article>
-							<img src="./images/users/profile-default.png" alt="">
-							<div class="data">
-								<p class="user">
-								<strong> <a href="./user/profile">Nombre usuario: </a> </strong>
-								 Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora doloribus enim aspernatur fugit corrupti suscipit sit dolore magnam, praesentium explicabo inventore molestias facilis labore. Fugit ipsa mollitia odit inventore consequuntur.</p>
-							</div>
-						</article>
-						<article>
-							<img src="./images/users/profile-default.png" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="./user/profile">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur.</p>
-							</div>
-						</article>
-						<article>
-							<img src="./images/users/profile-default.png" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="./user/profile">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									</p>
-							</div>
-						</article>
-						<article>
-							<img src="./images/users/profile-default.png" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="./user/profile">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet.</p>
-							</div>
-						</article>
-						<article>
-							<img src="./images/users/profile-default.png" alt="">
-							<div class="data">
-								<p class="user">
-									<strong> <a href="./user/profile">Nombre usuario: </a> </strong>
-									Texto del comentario que escribió el usuario Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									Tempora doloribus enim aspernatur fugit corrupti suscipit sit dolore</p>
-							</div>
-						</article>
-
+  <% for (let j = 0; j < producto.comentarios.length; j++) { %>
+    <article>
+      <img src="/images/users/<%= producto.comentarios[j].imagenPerfil %>" 
+     alt="<%= producto.comentarios[j].nombreUsuario %>">
+      <div class="data">
+        <p class="user">
+          <strong><%= producto.comentarios[j].nombreUsuario %>:</strong> 
+          <%= producto.comentarios[j].texto %>
+        </p>
+      </div>
+    </article>
+  <% } %>
+</section>
 					</section>
 					<form class="form" action="" method="POST">
 						<input class="form-input" type="text" value="" placeholder="Agregar comentario">

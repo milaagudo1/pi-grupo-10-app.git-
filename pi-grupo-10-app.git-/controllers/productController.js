@@ -9,4 +9,20 @@ const controladorProductoDetalle = {
     }
 };
 
-module.exports = controladorProductoDetalle;
+const controladorProductoBusqueda = {
+    results: function(req, res) {
+        return res.render("searchResults", { productos: localData.productos });
+    }
+};
+
+const controladorAddProduct = {
+    add: function(req, res) {
+        return res.render("addProduct", { title: "express" });
+    }
+};
+
+module.exports = {
+    show: controladorProductoDetalle.show,
+    results: controladorProductoBusqueda.results,
+    add: controladorAddProduct.add
+};

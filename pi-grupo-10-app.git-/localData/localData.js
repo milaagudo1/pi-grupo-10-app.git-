@@ -4,7 +4,7 @@ const localData = {
     email: "paezcamila@email.com",
     usuario: "CamilaPaez",
     contraseña: "123456",
-    avatar: "avatar1.jpg" // nombre del archivo de la imagen del usuario
+    avatar: "profile-default.png" // nombre del archivo de la imagen del usuario
   },
   productos: [
     {

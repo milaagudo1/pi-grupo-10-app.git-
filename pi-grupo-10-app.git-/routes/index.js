@@ -5,4 +5,6 @@ const controladorHome = require('../controllers/mainController');
 /* GET home page. */
 router.get("/", controladorHome.home );
 
+
 module.exports = router;
+

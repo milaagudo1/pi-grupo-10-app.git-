@@ -1,221 +1,47 @@
+
+<!--  Head -->
 <%- include('partials/head') %>
+<!--  /Head -->
 
 	<!-- Header -->
-	<header class="main-header">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-5 col-md-2">
-					<a href="/" class="main-header_home-link">
-						<img src="/images/logo.png">
-					</a>
-				</div>
-	
-				<div class="col-7 col-md-6">
-					<form action="/products/results" method="GET" class="search-form">
-						<input type="text" name="search" placeholder="Buscar productos, marcas y más"
-							class="search-form_input">
-						<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
-					</form>
-				</div>
-	
-				<div class="col-12 col-md-4">
-					<a class="main-header_credit-link">
-						<i class="fas fa-hand-holding-usd"></i>
-						Todas las opiniones en un solo lugar.
-					</a>
-				</div>
-			</div>
-	
-			<button class="btn-toggle-navbar">
-				<i class="fas fa-bars"></i>
-			</button>
-	
-			<nav class="main-navbar">
-				<ul class="left-navbar">
-					<li><a href="/">Todos los productos</a></li>
-					<li><a href="/products/add">Agregar producto</a></li>
-				</ul>
-				<ul class="right-navbar">
-					<li>
-						<a href="/users/profile"> Mi Perfil <i class="fas fa-user"></i></a>
-					</li>
-						<li>
-							<form action="" method="post">
-								<button class="logout" type="submit">
-									Cerrar sesión <i class="fas fa-sign-in-alt"></i>
-								</button>
-							</form>
-						</li>
-					<li>
-						<a href="/users/register">Registración <i class="far fa-address-card"></i>
-						</a>
-					</li>
-					<li>
-						<a href="/users/login">Login <i class="fas fa-sign-in-alt"></i></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</header>
+	<%- include('partials/header') %>
 	<!-- /Header -->
-
-	<!-- Novedades -->
+ <!-- Novedades -->
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="products-title">Productos</h2>
 			</div>
 			<!-- Show the "ultimos" products -->
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/auriculares.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/auricularesMicrofo.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/consolaVideojuegos.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/discoSSD.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/monitor.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/mouse.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/notebook-gamer.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/sillaGamer.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/teclado.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/products/detalle">
-						<figure class="product-box_image">
-							<img src="/images/products/webCam.webp" alt="cafetera moulinex">
-						</figure>
-						<article class="product-box_data">
-							<h2>Nombre del producto</h2>
-							<p>Descripción corta del producto Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-								delectus ex</p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-		</div>
-	</div>
+			<% for (let i = 0; i < productos.length; i++) { %>
+  <div class="col-12 col-sm-6 col-lg-3">
+    <section class="product-box">
+	<a href="/products/detalle">
+        <figure class="product-box_image">
+          <img src="/images/products/<%= productos[i].imagen %>" alt="<%= productos[i].nombre %>">
+        </figure>
+        <article class="product-box_data">
+          <h2><%= productos[i].nombre %></h2>
+          <p><%= productos[i].descripcion %></p>
+           <!-- Comentarios -->
+              <div class="comentarios">
+                <% for (let c = 0; c < productos[i].comentarios.length; c++) { %>
+                  <div class="comentario">
+                    <img src="/images/users/<%= productos[i].comentarios[c].imagenPerfil %>" 
+                         alt="<%= productos[i].comentarios[c].nombreUsuario %>" 
+                         width="30">
+                    <strong><%= productos[i].comentarios[c].nombreUsuario %>:</strong> 
+                    <%= productos[i].comentarios[c].texto %>
+                  </div>
+                <% } %>
+              </div>
+        </article>
+      </a>
+    </section>
+  </div>
+<% } %>
+
+</div>
+</div>
 
 <%- include('partials/footer') %>

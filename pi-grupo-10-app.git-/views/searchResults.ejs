@@ -3,8 +3,14 @@
   <!--  /Head -->
 
   <!-- Header -->
-  <%- include('partials/header') %>
-    <!-- /Header -->
+	<% if (logueado) { %>
+    <%- include('partials/headerLogueado') %>
+<% } else { %>
+    <%- include('partials/header') %>
+<% } %>
+
+	<!-- /Header -->
+    
     <!-- Novedades -->
     <div class="container products-wrapper">
       <div class="row">

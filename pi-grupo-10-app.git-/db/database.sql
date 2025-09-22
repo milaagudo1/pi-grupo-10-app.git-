@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS eCommerce;
 
 -- Creacion y uso de Base de Datos
 CREATE DATABASE eCommerce;

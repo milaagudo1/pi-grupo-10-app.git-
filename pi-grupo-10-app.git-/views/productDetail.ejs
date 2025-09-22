@@ -3,9 +3,14 @@
 <%- include('partials/head') %>
 <!--  /Head -->
 
-	<!-- Header -->
-   	<%- include('partials/header') %>
-	<!-- Header -->
+		<!-- Header -->
+	<% if (logueado) { %>
+    <%- include('partials/headerLogueado') %>
+<% } else { %>
+    <%- include('partials/header') %>
+<% } %>
+
+	<!-- /Header -->
 
 	
 	<!-- product detail -->
@@ -36,7 +41,7 @@
   <% } %>
 </section>
 					</section>
-					<form class="form" action="" method="POST">
+					<form  action="" class="form" action="" method="GET">
 						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>

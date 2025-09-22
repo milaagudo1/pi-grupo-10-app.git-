@@ -42,5 +42,5 @@ module.exports = {
     show: controladorProductoDetalle.show,
     results: controladorProductoBusqueda.results,
     add: controladorAddProduct.add,
-   edit: controladorProductoEdicion.edit
+    edit: controladorProductoEdicion.edit
 };

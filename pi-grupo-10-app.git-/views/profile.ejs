@@ -51,8 +51,10 @@
 											</p>
 											<!-- Comentarios -->
 											<div class="comentarios">
+												
 												<% for (let c=0; c < productos[i].comentarios.length; c++) { %>
 													<div class="comentario">
+														<section class="comments">
 														<img src="/images/users/<%= productos[i].comentarios[c].imagenPerfil %>"
 															alt="<%= productos[i].comentarios[c].nombreUsuario %>"
 															width="30">
@@ -60,7 +62,9 @@
 															<%= productos[i].comentarios[c].nombreUsuario %>:
 														</strong>
 														<%= productos[i].comentarios[c].texto %>
+														</section>
 													</div>
+													
 													<% } %>
 											</div>
 										</article>

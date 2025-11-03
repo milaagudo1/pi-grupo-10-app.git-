@@ -9,10 +9,10 @@ CREATE TABLE usuarios (
     contraseña VARCHAR(100) NOT NULL,
     avatar VARCHAR(250) DEFAULT 'default.jpg',
     
-    -- constraints obligatorios
-	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+    -- columnas de auditoria
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
     
     -- claves foraneas
     );
@@ -25,12 +25,13 @@ CREATE TABLE productos (
     
     usuario_id INT UNSIGNED NOT NULL,
     
-    -- constraints obligatorios
-	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+    -- columnas de auditoria
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     
-    -- claves foraneas
+    
+    -- claves foraneas test
     FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
     );
 
@@ -40,10 +41,10 @@ CREATE TABLE comentarios (
 	usuario_id INT UNSIGNED NOT NULL,
     comentario TEXT,
     
-    -- constraints obligatorios
-	createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+    -- columnas de auditoria
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
     
     -- claves foraneas
     FOREIGN KEY (usuario_id) REFERENCES usuarios (id),

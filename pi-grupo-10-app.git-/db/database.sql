@@ -5,9 +5,11 @@ USE eCommerce;
 
 CREATE TABLE usuarios (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
-    contraseña VARCHAR(100) NOT NULL,
+    contrasenia VARCHAR(100) NOT NULL,
     avatar VARCHAR(250) DEFAULT 'default.jpg',
+    nacionalidad VARCHAR(100),
     
     -- columnas de auditoria
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -53,12 +55,12 @@ CREATE TABLE comentarios (
     
     -- INSERTS
     
-INSERT INTO usuarios (email, contraseña) VALUES
-('admin@gmail.com', '12345'), 
-('usuario1@gmail.com', '12345'), 
-('usuario2@gmail.com', '12345'), 
-('usuario3@gmail.com', '12345'), 
-('usuario4@gmail.com', '12345');
+INSERT INTO usuarios (usuario, email, contrasenia, nacionalidad) VALUES
+('Admin', 'admin@gmail.com', '12345', 'Argentina'), 
+('Admin1', 'usuario1@gmail.com', '12345', 'Chile'), 
+('Admin2', 'usuario2@gmail.com', '12345', 'Uruguay'), 
+('Admin3','usuario3@gmail.com', '12345', 'Paraguay'), 
+('Admin4', 'usuario4@gmail.com', '12345', 'Brasil');
 
 INSERT INTO productos (imagen, nombre, descripcion, usuario_id) VALUES
 ('notebook-gamer.webp','Notebook Gamer', 'Notebook con 16GB RAM, 512GB SSD y tarjeta gráfica dedicada.', 1),

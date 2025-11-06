@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize, dataTypes) {
     let alias = "Usuario";
 
     let cols = {
@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
             type: dataTypes.INTEGER,
         },
 
-         usuario: {
+        usuario: {
             type: dataTypes.STRING
         },
 
@@ -16,19 +16,15 @@ module.exports = function (sequelize, DataTypes) {
             type: dataTypes.STRING
         },  
 
-        contraseña: {
+        contrasenia: {
             type: dataTypes.STRING
         },
 
-        fechaNacimiento: {
-            type: dataTypes.DATE
+        avatar: {
+            type: dataTypes.STRING
         },
 
-        dni: {
-            type: dataTypes.INTEGER
-        },
-
-        imagenPerfil: {
+        nacionalidad: {
             type: dataTypes.STRING
         }
     };
@@ -36,14 +32,14 @@ module.exports = function (sequelize, DataTypes) {
     let config = {
         tableName: 'usuarios',
         timestamps: true,
-        underscored: false
+        underscored: true
     };
 
     const Usuario = sequelize.define(alias, cols, config);
 
 
 
-    Usuario.associate = function (models) {
+    /*Usuario.associate = function (models) {
         Usuario.hasMany(models.Producto, {
             as: "productos",
             foreignKey: 'idUsuario'
@@ -54,7 +50,7 @@ module.exports = function (sequelize, DataTypes) {
 
 
         });
-    }
+    }*/
 
     return Usuario;
 }

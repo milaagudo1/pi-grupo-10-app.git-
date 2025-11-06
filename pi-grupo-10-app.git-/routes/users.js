@@ -9,8 +9,9 @@ router.get('/login', controladorUsuarios.login);
 router.post('/login', controladorUsuarios.login);
 
 router.get('/register', controladorUsuarios.register);
-router.post('/register', controladorUsuarios.register);
+router.post('/procesar_registro', controladorUsuarios.registerprocess);
 
-router.post('/logout', controladorUsuarios.logout);
+/*router.post('/logout', controladorUsuarios.logout); */
 
 module.exports = router;
+

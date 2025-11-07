@@ -1,27 +1,50 @@
 
 const express = require('express');
 const localData = require('../localData/localData');
+const db = require("../database/models");
 
 const controladorProducto = {
-    show: function(req, res) {
+    show: function (req, res) {
         const logueado = true;
-        let producto = localData.productos[0];
-        let usuario = localData.usuario;
-        return res.render("productDetail", { producto:producto, logueado, localData, usuario });
-    },      
+        const productoId = req.params.id
 
-    results: function(req, res) {
-        const logueado = false; 
+        db.Producto.findByPk(productoId,
+            {
+                include: [
+                    {
+                        model: db.Usuario,
+                        as: 'usuario', // si usaste un alias
+                    },
+                    {
+                        model: db.Comentario,
+                        as:"comentarios"
+                    }
+                ],
+            }
+        )
+            .then(function (producto) {
+                let usuario = localData.usuario;
+                console.log(producto.usuario.id);
+
+                return res.render("productDetail", { producto: producto, logueado, localData, usuario });
+            })
+            .catch(function (error) {
+                return res.send(error.message)
+            })
+    },
+
+    results: function (req, res) {
+        const logueado = false;
         return res.render("searchResults", { productos: localData.productos, logueado });
     },
 
-    add: function(req, res) {
-        const logueado = true; 
+    add: function (req, res) {
+        const logueado = true;
         return res.render("addProduct", { title: "express", logueado });
     },
 
-    edit: function(req, res) {
-        const logueado = true; 
+    edit: function (req, res) {
+        const logueado = true;
         let id = req.params.id;
         let indice = id - 1;
         let product = localData.productos[indice];

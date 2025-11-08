@@ -21,7 +21,7 @@ const controladorProducto = {
                     },
                     {
                         model: db.Comentario,
-                        as:"comentarios"
+                        as: "comentarios"
                     }
                 ],
             }
@@ -37,31 +37,31 @@ const controladorProducto = {
             })
     },
 
-    search: function(req, res){
-    let palabraBuscada = req.query.search;
+    search: function (req, res) {
+        let palabraBuscada = req.query.search;
 
-    if (palabraBuscada == undefined) {
-        return res.render('products/results', { productos: [], mensaje: "No hay resultados para su criterio de búsqueda" });
-    } else {
-        db.Producto.findAll({
-            where: { nombre: { [Op.like]: '%' + palabraBuscada + '%' } }, 
-            include: [
-                { association: 'usuario' } // alias de la asociación definida en el modelo
-            ]
-        })
-        .then(function(productos) {
-            if (productos.length != 0) {
-                return res.render('products/results', { productos: productos });
-            } else {
-                return res.render('products/results', { productos: [], mensaje: "No hay resultados para su criterio de búsqueda" });
-            }
-        })
-        .catch(function (err) {
-            console.error("Error al crear el usuario:", err);
-            return res.render("error", { error: err });
-        });
-    }
-},
+        if (palabraBuscada == undefined) {
+            return res.render('products/results', { productos: [], mensaje: "No hay resultados para su criterio de búsqueda" });
+        } else {
+            db.Producto.findAll({
+                where: { nombre: { [Op.like]: '%' + palabraBuscada + '%' } },
+                include: [
+                    { association: 'usuario' } // alias de la asociación definida en el modelo
+                ]
+            })
+                .then(function (productos) {
+                    if (productos.length != 0) {
+                        return res.render('products/results', { productos: productos });
+                    } else {
+                        return res.render('products/results', { productos: [], mensaje: "No hay resultados para su criterio de búsqueda" });
+                    }
+                })
+                .catch(function (err) {
+                    console.error("Error al crear el usuario:", err);
+                    return res.render("error", { error: err });
+                });
+        }
+    },
 
     results: function (req, res) {
         const logueado = false;
@@ -71,6 +71,29 @@ const controladorProducto = {
     add: function (req, res) {
         const logueado = true;
         return res.render("addProduct", { title: "express", logueado });
+
+    },
+    store: function (req, res) {
+
+        console.log(req.session.usuario);
+
+        let nombre = req.body.nombre;
+        let descripcion = req.body.descripcion;
+
+        db.Producto.create({
+            nombre: nombre,
+            descripcion: descripcion,
+            imagen: '/img/' + req.file.filename,
+            usuario_id: req.session.usuario.id
+        })
+            .then(function (data) {
+                res.locals.success = 'producto creado'
+                return res.redirect('/products/add')
+            })
+            .catch(function (error) {
+                return res.send(error.message)
+            })
+
     },
 
     edit: function (req, res) {

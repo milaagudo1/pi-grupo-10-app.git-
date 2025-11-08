@@ -14,7 +14,14 @@ const controladorUsuarios = {
 
     login: function (req, res) {
         const logueado = false;
-        return res.render("login", { logueado });
+
+        db.Usuario.findByPk(1)
+            .then(function (u) {
+                req.session.usuario = u
+                return res.render("login", { logueado });
+            })
+            .catch()
+
     },
 
     register: function (req, res) {
@@ -53,10 +60,10 @@ const controladorUsuarios = {
                             email: nuevoUsuario.email,
                             contrasenia: bcrypt.hashSync(nuevoUsuario.contrasenia, 10),
                             nacionalidad: nuevoUsuario.nacionalidad
-                        }) 
-                        .then(function () {
-                            return res.redirect("login");
-                        });
+                        })
+                            .then(function () {
+                                return res.redirect("login");
+                            });
 
                     } else {
                         // agregar error usando locals

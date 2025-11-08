@@ -20,6 +20,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//middleware configuracion de session
+app.use(session({
+  secret: "myapp", 
+  resave: false,
+  saveUninitialized: true
+}));
+
+//sistema de ruteo
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);

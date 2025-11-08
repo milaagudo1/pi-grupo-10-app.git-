@@ -33,14 +33,24 @@
 					<li><a href="/">Todos los productos</a></li>
 				</ul>
 				<ul class="right-navbar">
-			
+				
+				<!--cambiar loguado == true por lo que corresponda(codigo correcto que indique que el usuario esta loguado)-->
+				<% if (logueado == true) { %>
+					<li><a href="/users/profile">Mi Perfil <i class="far fa-user"></i></a></li>
 					<li>
-						<a href="/users/register">Registración <i class="far fa-address-card"></i>
-						</a>
+						<form action="/users/logout" method="POST">
+							<button type="submit">Logout <i class="fas fa-sign-out-alt"></i></button>
+						</form>
+					</li>
+				<% } else { %>
+					<li>
+						<a href="/users/register">Registración <i class="far fa-address-card"></i></a>
 					</li>
 					<li>
 						<a href="/users/login">Login <i class="fas fa-sign-in-alt"></i></a>
 					</li>
+				<% } %>				
+					
 				</ul>
 			</nav>
 		</div>

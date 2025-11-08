@@ -22,6 +22,17 @@ const controladorUsuarios = {
         return res.render("register", { logueado });
     },
 
+    logout: function (req, res) {
+        // borra la sesión del usuario
+        req.session.destroy();
+
+        // Limpia la cookie si existe
+        res.clearCookie('userEmail');   //tengo que checkar que se cree la cokie(o si tiene otro nom) userEmail se cree en el metodo login
+
+        // Redirige al home 
+        return res.redirect('/');
+    },
+
     registerprocess: function (req, res) {
         // obtener indormación de usuario 
         let nuevoUsuario = {

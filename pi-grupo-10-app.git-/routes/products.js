@@ -5,7 +5,8 @@ const productController = require('../controllers/productController');
 
 // Ruta para detalle de producto
 router.get('/detalle/:id', productController.show);
-router.get('/results', productController.results);
+router.get('/results', productController.search);
+
 router.get('/add', productController.add);
 
 //para el form de edicion de un producto

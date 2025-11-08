@@ -2,6 +2,10 @@
 const express = require('express');
 const localData = require('../localData/localData');
 const db = require("../database/models");
+const Product = db.Producto;      // alias del modelo producto
+const Usuario = db.Usuario;      // alias del modelo usuario
+const Op = db.Sequelize.Op;
+
 
 const controladorProducto = {
     show: function (req, res) {
@@ -32,6 +36,32 @@ const controladorProducto = {
                 return res.send(error.message)
             })
     },
+
+    search: function(req, res){
+    let palabraBuscada = req.query.search;
+
+    if (palabraBuscada == undefined) {
+        return res.render('products/results', { productos: [], mensaje: "No hay resultados para su criterio de búsqueda" });
+    } else {
+        db.Producto.findAll({
+            where: { nombre: { [Op.like]: '%' + palabraBuscada + '%' } }, 
+            include: [
+                { association: 'usuario' } // alias de la asociación definida en el modelo
+            ]
+        })
+        .then(function(productos) {
+            if (productos.length != 0) {
+                return res.render('products/results', { productos: productos });
+            } else {
+                return res.render('products/results', { productos: [], mensaje: "No hay resultados para su criterio de búsqueda" });
+            }
+        })
+        .catch(function (err) {
+            console.error("Error al crear el usuario:", err);
+            return res.render("error", { error: err });
+        });
+    }
+},
 
     results: function (req, res) {
         const logueado = false;

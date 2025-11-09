@@ -30,8 +30,21 @@
 			<ul class="left-navbar">
 				<li><a href="/">Todos los productos</a></li>
 				<% if (usuario) { %>
+	
+			<button class="btn-toggle-navbar">
+				<i class="fas fa-bars"></i>
+			</button>
+	
+			<nav class="main-navbar">
+				<ul class="left-navbar">
+					<li><a href="/">Todos los productos</a></li>
+				</ul>
+				<ul class="right-navbar">
+				
+				<% if (logueado == true) { %>
+					<li><a href="/users/profile">Mi Perfil <i class="far fa-user"></i></a></li>
 					<li>
-						<span class="saludo">Hola, <%= usuario.usuario %> 👋</span>
+						<span class="saludo">Hola, <%= usuario.usuario %> </span>
 					</li>
 					<li>
 						<a href="/users/profile/<%= usuario.id %>">Mi Perfil <i class="far fa-user"></i></a>

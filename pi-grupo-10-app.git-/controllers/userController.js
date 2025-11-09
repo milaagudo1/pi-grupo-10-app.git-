@@ -1,4 +1,3 @@
-const localData = require('../localData/localData'); // borrar cuando ya esté configurado con la base de datos
 const db = require('../database/models');
 const usuario = db.Usuario;
 const bcrypt = require('bcryptjs');
@@ -12,11 +11,31 @@ const controladorUsuarios = {
 
         const usuarioLogueado = req.session.usuarioLogueado;
         const logueado = true;
-        const productos = localData.productos;
-        return res.render("profile", { usuario: usuarioLogueado, productos, logueado });
+
+        db.Producto.findAll({
+            where: { usuario_id: usuarioLogueado.id }
+        })
+            .then(function (productos) {
+                const misProductos = productos.length;
+
+                return res.render("profile", {
+                    usuario: usuarioLogueado,
+                    productos: productos,
+                    misProductos: misProductos,
+                    logueado
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+                res.render("profile", {
+                    usuario: usuarioLogueado,
+                    productos: [],
+                    misProductos: 0,
+                    logueado
+                });
+            });
     },
 
-  
     // Login 
     login: function (req, res) {
         if (req.session.usuarioLogueado) {

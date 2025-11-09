@@ -1,9 +1,5 @@
 
-const express = require('express');
-const localData = require('../localData/localData');
 const db = require("../database/models");
-const Product = db.Producto;      // alias del modelo producto
-const Usuario = db.Usuario;      // alias del modelo usuario
 const Op = db.Sequelize.Op;
 
 
@@ -27,10 +23,10 @@ const controladorProducto = {
             }
         )
             .then(function (producto) {
-                let usuario = localData.usuario;
+                let usuario = req.session.usuarioLogueado;
                 console.log(producto.usuario.id);
 
-                return res.render("productDetail", { producto: producto, logueado, localData, usuario });
+                return res.render("productDetail", { producto, logueado, usuario } );
             })
             .catch(function (error) {
                 return res.send(error.message)
@@ -65,7 +61,13 @@ const controladorProducto = {
 
     results: function (req, res) {
         const logueado = false;
-        return res.render("searchResults", { productos: localData.productos, logueado });
+         db.Producto.findAll()
+        .then(function (productos) {
+            return res.render("searchResults", { productos, logueado });
+        })
+        .catch(function (error) {
+            return res.send(error.message);
+        });
     },
 
     add: function (req, res) {
@@ -75,7 +77,7 @@ const controladorProducto = {
     },
     store: function (req, res) {
 
-        console.log(req.session.usuario);
+        console.log(req.session.usuarioLogueado);
 
         let nombre = req.body.nombre;
         let descripcion = req.body.descripcion;
@@ -84,7 +86,7 @@ const controladorProducto = {
             nombre: nombre,
             descripcion: descripcion,
             imagen: '/img/' + req.file.filename,
-            usuario_id: req.session.usuario.id
+            usuario_id: req.session.usuarioLogueado.id
         })
             .then(function (data) {
                 res.locals.success = 'producto creado'
@@ -99,16 +101,21 @@ const controladorProducto = {
     edit: function (req, res) {
         const logueado = true;
         let id = req.params.id;
-        let indice = id - 1;
-        let product = localData.productos[indice];
-        let usuario = localData.usuario;
 
+        db.Producto.findByPk(id)
+        .then(function (product) {
+            let usuario = req.session.usuarioLogueado;
 
-        if (!product) {
-            return res.send("No existe un producto con ese ID");
-        }
+            if (!product) {
+                return res.send("No existe un producto con ese ID");
+            }
 
-        return res.render("product-edit", { product, logueado, usuario });
+            return res.render("product-edit", { product, logueado, usuario });
+        })
+        .catch(function (error) {
+            return res.send(error.message);
+        });
+        
     }
 };
 

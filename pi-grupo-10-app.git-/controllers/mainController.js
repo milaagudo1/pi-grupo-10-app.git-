@@ -1,5 +1,4 @@
 
-const localData = require('../localData/localData');
 const db = require('../database/models');
 let op = db.Sequelize.Op;
 

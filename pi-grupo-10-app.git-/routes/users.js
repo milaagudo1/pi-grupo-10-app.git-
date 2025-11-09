@@ -4,6 +4,8 @@ let controladorUsuarios = require('../controllers/userController');
 
 /* Rutas de usuario */
 router.get('/profile', controladorUsuarios.profile);
+router.get('/profile/:id', controladorUsuarios.profile);
+
 
 router.get('/login', controladorUsuarios.login);
 router.post('/login', controladorUsuarios.login);

@@ -1,47 +1,84 @@
-const localData = require('../localData/localData'); // borrar cuando ya este configurado con la base de datos
+const localData = require('../localData/localData'); // borrar cuando ya esté configurado con la base de datos
 const db = require('../database/models');
 const usuario = db.Usuario;
 const bcrypt = require('bcryptjs');
 
-
 const controladorUsuarios = {
+    // Perfil usuario
     profile: function (req, res) {
-        const usuario = localData.usuario;
+        if (!req.session.usuarioLogueado) {
+            return res.redirect('/login');
+        }
+
+        const usuarioLogueado = req.session.usuarioLogueado;
         const logueado = true;
         const productos = localData.productos;
-        return res.render("profile", { usuario, productos, logueado });
+        return res.render("profile", { usuario: usuarioLogueado, productos, logueado });
     },
 
+  
+    // Login 
     login: function (req, res) {
-        const logueado = false;
+        if (req.session.usuarioLogueado) {
+            return res.redirect(`/users/profile/${req.session.usuarioLogueado.id}`);
+        }
 
-        db.Usuario.findByPk(1)
-            .then(function (u) {
-                req.session.usuario = u
-                return res.render("login", { logueado });
+        const logueado = false;
+        return res.render("login", { logueado, error: "" });
+    },
+
+    loginprocess: function (req, res) {
+        let email = req.body.email;
+        let password = req.body.password;
+        let recordar = req.body.recordar;
+
+        // Validaciones de campos vacíos
+        if (!email || !password) {
+            return res.render("login", { error: "Debe completar ambos campos." });
+        }
+
+        // Buscar el usuario en la base de datos
+        usuario.findOne({ where: { email: email } })
+            .then(function (usuarioEncontrado) {
+                if (!usuarioEncontrado) {
+                    return res.render("login", { error: "El email no está registrado." });
+                }
+
+                // Verificar contraseña
+                const contraseniaOk = bcrypt.compareSync(password, usuarioEncontrado.contrasenia);
+                if (!contraseniaOk) {
+                    return res.render("login", { error: "La contraseña es incorrecta." });
+                }
+
+                // Crear sesión
+                req.session.usuarioLogueado = usuarioEncontrado;
+
+                // Recordarme
+                if (recordar) {
+                    res.cookie("userEmail", usuarioEncontrado.email, { maxAge: 1000 * 60 * 5 }); // 5 minutos
+                }
+
+                return res.redirect(`/users/profile/${usuarioEncontrado.id}`);
             })
-            .catch()
-
+            .catch(function (err) {
+                console.error("Error en login:", err);
+                return res.render("login", { error: "Ocurrió un error al iniciar sesión." });
+            });
     },
 
+
+    // Register
     register: function (req, res) {
+        if (req.session.usuarioLogueado) {
+            return res.redirect(`/users/profile/${req.session.usuarioLogueado.id}`);
+        }
+
         const logueado = false;
-        return res.render("register", { logueado });
-    },
-
-    logout: function (req, res) {
-        // borra la sesión del usuario
-        req.session.destroy();
-
-        // Limpia la cookie si existe
-        res.clearCookie('userEmail');   //tengo que checkar que se cree la cokie(o si tiene otro nom) userEmail se cree en el metodo login
-
-        // Redirige al home 
-        return res.redirect('/');
+        return res.render("register", { logueado, error: "" });
     },
 
     registerprocess: function (req, res) {
-        // obtener indormación de usuario 
+        // obtener información del formulario
         let nuevoUsuario = {
             usuario: req.body.name,
             email: req.body.email,
@@ -49,7 +86,16 @@ const controladorUsuarios = {
             nacionalidad: req.body.nacionalidad
         };
 
-        // verificar que email sea unico
+        // Validar campos vacíos
+        if (!nuevoUsuario.email || nuevoUsuario.email.trim() === "") {
+            return res.render("register", { error: "El email no puede estar vacío." });
+        }
+
+        if (!nuevoUsuario.contrasenia || nuevoUsuario.contrasenia.trim() === "") {
+            return res.render("register", { error: "La contraseña no puede estar vacía." });
+        }
+
+        // Verificar email único
         usuario.findOne({ where: { email: nuevoUsuario.email } })
             .then(function (user1) {
                 if (user1 === null) {
@@ -59,29 +105,34 @@ const controladorUsuarios = {
                             usuario: nuevoUsuario.usuario,
                             email: nuevoUsuario.email,
                             contrasenia: bcrypt.hashSync(nuevoUsuario.contrasenia, 10),
-                            nacionalidad: nuevoUsuario.nacionalidad
+                            nacionalidad: nuevoUsuario.nacionalidad,
+                            created_at: new Date()
                         })
                             .then(function () {
-                                return res.redirect("login");
+                                return res.redirect("/users/login");
+                            })
+                            .catch(function (error) {
+                                console.log("Error al crear el usuario:", error);
+                                return res.render("register", { error: "Hubo un problema al registrar el usuario." });
                             });
-
                     } else {
-                        // agregar error usando locals
-                        return res.redirect("register");
+                        return res.render("register", { error: "La contraseña debe tener al menos 3 caracteres." });
                     }
                 } else {
-                    // agregar error usando locals
-                    return res.redirect("register");
+                    return res.render("register", { error: "El email ya está registrado." });
                 }
             })
+            .catch(function (err) {
+                console.error("Error al verificar email:", err);
+                return res.render("register", { error: "Hubo un error al verificar el email." });
+            });
+    },
 
-
+    logout: function (req, res) {
+        req.session.destroy();
+        res.clearCookie('userEmail');
+        return res.redirect('/');
     }
-
-
-}
+};
 
 module.exports = controladorUsuarios;
-
-
-

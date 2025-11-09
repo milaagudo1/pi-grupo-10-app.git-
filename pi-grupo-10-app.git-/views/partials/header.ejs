@@ -1,45 +1,49 @@
-
 <header class="main-header">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-5 col-md-2">
-					<a href="/" class="main-header_home-link">
-						<img src="/images/logo.png">
-					</a>
-				</div>     
-	
-				<div class="col-7 col-md-6">
-					<form action="/products/results" method="GET" class="search-form">
-						<input type="text" name="search" placeholder="Buscar productos, marcas y más"
-							class="search-form_input">
-						<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
-					</form>
-				</div>
-	
-				<div class="col-12 col-md-4">
-					<a class="main-header_credit-link">
-						<i class="fas fa-hand-holding-usd"></i>
-						Todas las opiniones en un solo lugar.
-					</a>
-				</div>
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-5 col-md-2">
+				<a href="/" class="main-header_home-link">
+					<img src="/images/logo.png" alt="Logo">
+				</a>
+			</div>     
+
+			<div class="col-7 col-md-6">
+				<form action="/products/results" method="GET" class="search-form">
+					<input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
+					<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
+				</form>
 			</div>
-	
-			<button class="btn-toggle-navbar">
-				<i class="fas fa-bars"></i>
-			</button>
-	
-			<nav class="main-navbar">
-				<ul class="left-navbar">
-					<li><a href="/">Todos los productos</a></li>
-				</ul>
-				<ul class="right-navbar">
-				
-				<!--cambiar loguado == true por lo que corresponda(codigo correcto que indique que el usuario esta loguado)-->
-				<% if (logueado == true) { %>
-					<li><a href="/users/profile">Mi Perfil <i class="far fa-user"></i></a></li>
+
+			<div class="col-12 col-md-4">
+				<a class="main-header_credit-link">
+					<i class="fas fa-hand-holding-usd"></i>
+					Todas las opiniones en un solo lugar.
+				</a>
+			</div>
+		</div>
+
+		<button class="btn-toggle-navbar">
+			<i class="fas fa-bars"></i>
+		</button>
+
+		<nav class="main-navbar">
+			<ul class="left-navbar">
+				<li><a href="/">Todos los productos</a></li>
+				<% if (usuario) { %>
 					<li>
-						<form action="/users/logout" method="POST">
-							<button type="submit">Logout <i class="fas fa-sign-out-alt"></i></button>
+						<span class="saludo">Hola, <%= usuario.usuario %> 👋</span>
+					</li>
+					<li>
+						<a href="/users/profile/<%= usuario.id %>">Mi Perfil <i class="far fa-user"></i></a>
+					</li>
+					<li>
+						<a href="/products/add">Agregar producto <i class="fas fa-plus-circle"></i></a>
+					</li>
+					<li>
+						<form action="/users/logout" method="POST" style="display:inline;">
+							<button type="submit" class="logout-button">
+								Logout <i class="fas fa-sign-out-alt"></i>
+							</button>
 						</form>
 					</li>
 				<% } else { %>
@@ -49,9 +53,8 @@
 					<li>
 						<a href="/users/login">Login <i class="fas fa-sign-in-alt"></i></a>
 					</li>
-				<% } %>				
-					
-				</ul>
-			</nav>
-		</div>
-	</header>
+				<% } %>
+			</ul>
+		</nav>
+	</div>
+</header>

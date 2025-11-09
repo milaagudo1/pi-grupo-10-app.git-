@@ -6,7 +6,7 @@ let controladorUsuarios = require('../controllers/userController');
 router.get('/profile', controladorUsuarios.profile);
 
 router.get('/login', controladorUsuarios.login);
-router.post('/login', controladorUsuarios.login);
+router.post('/login', controladorUsuarios.loginprocess);
 
 router.get('/register', controladorUsuarios.register);
 router.post('/procesar_registro', controladorUsuarios.registerprocess);

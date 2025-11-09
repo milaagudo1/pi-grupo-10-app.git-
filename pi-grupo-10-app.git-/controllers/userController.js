@@ -7,7 +7,7 @@ const controladorUsuarios = {
     // Perfil usuario
     profile: function (req, res) {
         if (!req.session.usuarioLogueado) {
-            return res.redirect('/login');
+            return res.redirect('users/login');
         }
 
         const usuarioLogueado = req.session.usuarioLogueado;
@@ -24,7 +24,7 @@ const controladorUsuarios = {
         }
 
         const logueado = false;
-        return res.render("login", { logueado, error: "" });
+        return res.render("login", { logueado: false, error: "" });
     },
 
     loginprocess: function (req, res) {
@@ -32,22 +32,20 @@ const controladorUsuarios = {
         let password = req.body.password;
         let recordar = req.body.recordar;
 
-        // Validaciones de campos vacíos
         if (!email || !password) {
             return res.render("login", { error: "Debe completar ambos campos." });
         }
 
-        // Buscar el usuario en la base de datos
         usuario.findOne({ where: { email: email } })
             .then(function (usuarioEncontrado) {
                 if (!usuarioEncontrado) {
-                    return res.render("login", { error: "El email no está registrado." });
+                    return res.render("login", { loguado: false, error: "El email no está registrado." });
                 }
 
                 // Verificar contraseña
                 const contraseniaOk = bcrypt.compareSync(password, usuarioEncontrado.contrasenia);
                 if (!contraseniaOk) {
-                    return res.render("login", { error: "La contraseña es incorrecta." });
+                    return res.render("login", { logueado: false, error: "La contraseña es incorrecta." });
                 }
 
                 // Crear sesión
@@ -62,7 +60,7 @@ const controladorUsuarios = {
             })
             .catch(function (err) {
                 console.error("Error en login:", err);
-                return res.render("login", { error: "Ocurrió un error al iniciar sesión." });
+                return res.render("login", { logueado: false, error: "Ocurrió un error al iniciar sesión." });
             });
     },
 
@@ -74,11 +72,10 @@ const controladorUsuarios = {
         }
 
         const logueado = false;
-        return res.render("register", { logueado, error: "" });
+        return res.render("register", { logueado: false, error: "" });
     },
 
     registerprocess: function (req, res) {
-        // obtener información del formulario
         let nuevoUsuario = {
             usuario: req.body.name,
             email: req.body.email,
@@ -86,13 +83,12 @@ const controladorUsuarios = {
             nacionalidad: req.body.nacionalidad
         };
 
-        // Validar campos vacíos
         if (!nuevoUsuario.email || nuevoUsuario.email.trim() === "") {
-            return res.render("register", { error: "El email no puede estar vacío." });
+            return res.render("register", { logueado: false, error: "El email no puede estar vacío." });
         }
 
         if (!nuevoUsuario.contrasenia || nuevoUsuario.contrasenia.trim() === "") {
-            return res.render("register", { error: "La contraseña no puede estar vacía." });
+            return res.render("register", { logueado: false, error: "La contraseña no puede estar vacía." });
         }
 
         // Verificar email único
@@ -116,15 +112,15 @@ const controladorUsuarios = {
                                 return res.render("register", { error: "Hubo un problema al registrar el usuario." });
                             });
                     } else {
-                        return res.render("register", { error: "La contraseña debe tener al menos 3 caracteres." });
+                        return res.render("register", { logueado: false, error: "La contraseña debe tener al menos 3 caracteres." });
                     }
                 } else {
-                    return res.render("register", { error: "El email ya está registrado." });
+                    return res.render("register", { logueado: false, error: "El email ya está registrado." });
                 }
             })
             .catch(function (err) {
                 console.error("Error al verificar email:", err);
-                return res.render("register", { error: "Hubo un error al verificar el email." });
+                return res.render("register", { logueado: false, error: "Hubo un error al verificar el email." });
             });
     },
 

@@ -39,7 +39,7 @@ const controladorProducto = {
             let mensaje = "";
 
             if (productos.length === 0) {
-                mensaje = "No se encontraron productos.";
+                mensaje = "No se encontron" + (busquedaUsuario ? ` productos para "${busquedaUsuario}".` : " productos.");
             }
 
             return res.render("searchResults", { productos, mensaje });

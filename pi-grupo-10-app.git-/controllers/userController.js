@@ -6,7 +6,7 @@ const controladorUsuarios = {
     // Perfil usuario
     profile: function (req, res) {
         if (!req.session.usuarioLogueado) {
-            return res.redirect('users/login');
+            return res.redirect('/users/login');
         }
 
         const usuarioLogueado = req.session.usuarioLogueado;
@@ -49,7 +49,7 @@ const controladorUsuarios = {
     loginprocess: function (req, res) {
         let email = req.body.email;
         let password = req.body.password;
-        let recordar = req.body.recordar;
+        let recordarme = req.body.recordarme;
 
         if (!email || !password) {
             return res.render("login", { error: "Debe completar ambos campos." });
@@ -58,7 +58,7 @@ const controladorUsuarios = {
         usuario.findOne({ where: { email: email } })
             .then(function (usuarioEncontrado) {
                 if (!usuarioEncontrado) {
-                    return res.render("login", { loguado: false, error: "El email no está registrado." });
+                    return res.render("login", { logueado: false, error: "El email no está registrado." });
                 }
 
                 // Verificar contraseña
@@ -71,7 +71,7 @@ const controladorUsuarios = {
                 req.session.usuarioLogueado = usuarioEncontrado;
 
                 // Recordarme
-                if (recordar) {
+                if (recordarme) {
                     res.cookie("userEmail", usuarioEncontrado.email, { maxAge: 1000 * 60 * 5 }); // 5 minutos
                 }
 

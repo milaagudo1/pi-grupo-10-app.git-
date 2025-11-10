@@ -46,23 +46,13 @@ const controladorUsuarios = {
     },
 
     loginprocess: function (req, res) {
-        /* let infoUsuario = {
-             email : req.body.email,
-             password : req.body.password,
-             recordarme : req.body.recordarme
-         };
-         
-         //poner en session
-         req.session.user = infoUsuario;
- 
-         res.send(infoUsuario);
-       */
         let email = req.body.email;
         let password = req.body.password;
-        let recordarme = req.body.recordarme;
+        let recordarme = req.body.recordame;
 
-        if (email != "" && password != "") {
-            return res.render("login", { error: "Debe completar ambos campos." });
+
+        if (email == "" || password == "") {
+            return res.send("Debe completar ambos campos.");
         }
 
         usuario.findOne({ where: { email: email } })

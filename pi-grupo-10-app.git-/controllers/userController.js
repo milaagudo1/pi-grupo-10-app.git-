@@ -71,7 +71,7 @@ const controladorUsuarios = {
                 req.session.usuarioLogueado = usuarioEncontrado;
 
                 // Recordarme
-                if (recordar) {
+                if (recordarme) {
                     res.cookie("userEmail", usuarioEncontrado.email, { maxAge: 1000 * 60 * 5 }); // 5 minutos
                 }
 

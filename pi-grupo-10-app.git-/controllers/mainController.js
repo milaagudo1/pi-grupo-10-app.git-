@@ -2,6 +2,7 @@
 const db = require('../database/models');
 let op = db.Sequelize.Op;
 
+//falta const logeado dinamico.
 const controladorHome = {
     home: function (req, res) {
         const logueado = false;
@@ -15,7 +16,14 @@ const controladorHome = {
                 },
                 {
                     model: db.Comentario,
-                    as: "comentarios"
+                    as: "comentarios",
+
+                    include: [
+                        {
+                            model: db.Usuario,
+                            as: 'usuario'
+                        }
+                    ]
                 }
             ],
 

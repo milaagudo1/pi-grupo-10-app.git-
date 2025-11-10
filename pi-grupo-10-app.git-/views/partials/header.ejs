@@ -38,24 +38,27 @@
             </ul>
 
             <ul class="right-navbar">
-                <% if (logueado == true) { %>
+                <% if (usuario) { %>
                     <li>
-                        <span class="saludo">Hola, <%= usuario.usuario %>!</span>
+                         <span class="saludo">Hola, <%= usuario.usuario %>!</span>
                     </li>
                     <li>
-                        <a href="/users/profile">Mi Perfil <i class="far fa-user"></i></a>
+                         <a href="/users/profile">Mi Perfil <i class="far fa-user"></i></a>
                     </li>
                     <li>
-                        <a href="/products/add">Agregar producto <i class="fas fa-plus-circle"></i></a>
+                         <a href="/products/add">Agregar producto <i class="fas fa-plus-circle"></i></a>
                     </li>
                     <li>
-                        <form action="/users/logout" method="POST" style="display:inline;">
+                         <form action="/users/logout" method="POST" style="display:inline;">
                             <button type="submit" class="logout-button">
                                 Logout <i class="fas fa-sign-out-alt"></i>
                             </button>
-                        </form>
+                         </form>
                     </li>
-                <% } else { %>
+                 <% } else { %>
+                    <li>
+                        <span class="saludo">Hola, invitado!</span>
+                    </li>
                     <li>
                         <a href="/users/register">Registración <i class="far fa-address-card"></i></a>
                     </li>

@@ -19,7 +19,7 @@ const productController = require('../controllers/productController');
 
 // Ruta para detalle de producto
 router.get('/detalle/:id', productController.show);
-router.get('/results', productController.search);
+router.get('/results', productController.results);
 //
 router.post('/store', upload.single('imagen'), productController.store);
 //

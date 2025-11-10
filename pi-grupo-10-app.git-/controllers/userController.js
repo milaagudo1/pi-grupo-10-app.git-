@@ -42,16 +42,26 @@ const controladorUsuarios = {
             return res.redirect(`/users/profile/${req.session.usuarioLogueado.id}`);
         }
 
-        const logueado = false;
         return res.render("login", { logueado: false, error: "" });
     },
 
     loginprocess: function (req, res) {
+        /* let infoUsuario = {
+             email : req.body.email,
+             password : req.body.password,
+             recordarme : req.body.recordarme
+         };
+         
+         //poner en session
+         req.session.user = infoUsuario;
+ 
+         res.send(infoUsuario);
+       */
         let email = req.body.email;
         let password = req.body.password;
         let recordarme = req.body.recordarme;
 
-        if (!email || !password) {
+        if (email != "" && password != "") {
             return res.render("login", { error: "Debe completar ambos campos." });
         }
 
@@ -72,7 +82,7 @@ const controladorUsuarios = {
 
                 // Recordarme
                 if (recordarme) {
-                    res.cookie("userEmail", usuarioEncontrado.email, { maxAge: 1000 * 60 * 5 }); // 5 minutos
+                    res.cookie("userEmail", usuarioEncontrado.email, { maxAge: 1000 * 60 * 5 });
                 }
 
                 return res.redirect(`/users/profile/${usuarioEncontrado.id}`);
@@ -102,12 +112,13 @@ const controladorUsuarios = {
             nacionalidad: req.body.nacionalidad
         };
 
-        if (!nuevoUsuario.email || nuevoUsuario.email.trim() === "") {
+
+        if (nuevoUsuario.email == "") {
             return res.render("register", { logueado: false, error: "El email no puede estar vacío." });
         }
 
-        if (!nuevoUsuario.contrasenia || nuevoUsuario.contrasenia.trim() === "") {
-            return res.render("register", { logueado: false, error: "La contraseña no puede estar vacía." });
+        if (nuevoUsuario.contrasenia == "") {
+            return res.render("register", { logueado: false, error: "La Contraseña no puede estar vacía." });
         }
 
         // Verificar email único

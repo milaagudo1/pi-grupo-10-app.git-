@@ -63,16 +63,16 @@ INSERT INTO usuarios (usuario, email, contrasenia, nacionalidad) VALUES
 ('Admin4', 'usuario4@gmail.com', '12345', 'Brasil');
 
 INSERT INTO productos (imagen, nombre, descripcion, usuario_id) VALUES
-('/images/products/notebook-gamer.webp','Notebook Gamer', 'Notebook con 16GB RAM, 512GB SSD y tarjeta gráfica dedicada.', 1),
-('/images/products/auriculares.webp','Auriculares Inalámbricos', 'Auriculares Bluetooth 5.0 con cancelación de ruido activa.', 1),
-('/images/products/mouse.webp','Mouse Gamer RGB', 'Mouse con sensor de alta precisión y luces RGB personalizables.', 1),
-('/images/products/teclado.webp','Teclado Mecánico', 'Teclado mecánico con switches táctiles y retroiluminación LED..', 1),
-('/images/products/monitor.webp','Monitor 27\" 144Hz', 'Monitor Full HD de 27 pulgadas con tasa de refresco de 144Hz.', 1),
-('/images/products/consolaVideojuegos.webp','Consola de Videojuegos', 'Consola de última generación con gráficos en 4K.', 1),
-('/images/products/sillaGamer.webp','Silla Gamer', 'Silla ergonómica con soporte lumbar y reclinable.', 1),
-('/images/products/webCam.webp','Webcam HD', 'Webcam con resolución 1080p ideal para streaming y reuniones.', 1),
-('/images/products/discoSSD.webp','Disco SSD 1TB', 'Disco sólido con gran velocidad de lectura y escritura.', 1),
-('/images/products/auricularesMicrofo.webp','Auriculares con Micrófono', 'Auriculares con micrófono integrado, ideales para gaming y llamadas.', 1);
+('notebook-gamer.webp','Notebook Gamer', 'Notebook con 16GB RAM, 512GB SSD y tarjeta gráfica dedicada.', 1),
+('products/auriculares.webp','Auriculares Inalámbricos', 'Auriculares Bluetooth 5.0 con cancelación de ruido activa.', 1),
+('products/mouse.webp','Mouse Gamer RGB', 'Mouse con sensor de alta precisión y luces RGB personalizables.', 1),
+('products/teclado.webp','Teclado Mecánico', 'Teclado mecánico con switches táctiles y retroiluminación LED..', 1),
+('products/monitor.webp','Monitor 27\" 144Hz', 'Monitor Full HD de 27 pulgadas con tasa de refresco de 144Hz.', 1),
+('products/consolaVideojuegos.webp','Consola de Videojuegos', 'Consola de última generación con gráficos en 4K.', 1),
+('products/sillaGamer.webp','Silla Gamer', 'Silla ergonómica con soporte lumbar y reclinable.', 1),
+('products/webCam.webp','Webcam HD', 'Webcam con resolución 1080p ideal para streaming y reuniones.', 1),
+('products/discoSSD.webp','Disco SSD 1TB', 'Disco sólido con gran velocidad de lectura y escritura.', 1),
+('products/auricularesMicrofo.webp','Auriculares con Micrófono', 'Auriculares con micrófono integrado, ideales para gaming y llamadas.', 1);
 
 INSERT INTO comentarios (usuario_id, producto_id, comentario) VALUES
 -- Producto 1: Notebook Gamer

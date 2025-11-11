@@ -10,7 +10,6 @@ const controladorUsuarios = {
         }
 
         const usuarioLogueado = req.session.usuarioLogueado;
-        const logueado = true;
 
         db.Producto.findAll({
             include: [
@@ -32,7 +31,6 @@ const controladorUsuarios = {
                     usuario: usuarioLogueado,
                     productos: productos,
                     misProductos: misProductos,
-                    logueado
                 });
             })
             .catch(function (error) {
@@ -41,7 +39,6 @@ const controladorUsuarios = {
                     usuario: usuarioLogueado,
                     productos: [],
                     misProductos: 0,
-                    logueado
                 });
             });
     },

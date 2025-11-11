@@ -101,6 +101,31 @@ const controladorProducto = {
             .catch(function (error) {
                 return res.send(error.message);
             });
+    },
+
+    addComment: function (req, res) {
+
+        if (!req.session.usuarioLogueado) {
+            return res.redirect('/users/login');
+        }
+
+        const productoId = req.params.id;
+        const usuarioId = req.session.usuarioLogueado.id;
+        const textoComentario = req.body.comentario;
+
+        db.Comentario.create({
+            comentario: textoComentario,
+            producto_id: productoId,
+            usuario_id: usuarioId
+
+        })
+            .then(function () {
+                return res.redirect('/products/detalle/' + productoId);
+
+            })
+            .catch(function (error) {
+                return res.send(error.message);
+            });
     }
 };
 

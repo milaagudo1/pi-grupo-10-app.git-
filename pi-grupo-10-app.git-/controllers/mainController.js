@@ -1,23 +1,22 @@
 
 const db = require('../database/models');
-let op = db.Sequelize.Op;
 
-//falta const logeado dinamico.
 const controladorHome = {
     home: function (req, res) {
-        const logueado = false;
+
+        if (req.session.usuarioLogueado) {
+            var usuarioLogueado = req.session.usuarioLogueado;
+        }
 
         db.Producto.findAll({
-
             include: [
                 {
                     model: db.Usuario,
-                    as: 'usuario', // si usaste un alias
+                    as: 'usuario',
                 },
                 {
                     model: db.Comentario,
-                    as: "comentarios",
-
+                    as: 'comentarios',
                     include: [
                         {
                             model: db.Usuario,
@@ -26,22 +25,22 @@ const controladorHome = {
                     ]
                 }
             ],
-
         })
-            .then(function (productos) {
-                //console.log(productos[0].comentarios[0]);
-
-                return res.render('index', { productos, logueado }); // Muestra todos los productos en la página principal
-
-
-            })
-            .catch(function (error) {
-                return res.send(error.message)
-            })
+        .then(function (productos) {
+           
+            return res.render("index", {
+                productos: productos,
+                usuario: usuarioLogueado
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+            return res.send("Error al cargar los productos");
+        });
     }
 };
 
-
 module.exports = controladorHome;
+
 
 

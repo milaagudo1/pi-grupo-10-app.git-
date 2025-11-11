@@ -43,10 +43,31 @@ app.use(function (req, res, next) {
 //middleware de cookies hacia vistas
 app.use(function (req, res, next) {
   if (req.cookies.userEmail != undefined && req.session.usuarioLogueado == undefined) {
-    req.session.usuarioLogueado = req.cookies.userEmail;
-    res.locals.usuario = req.cookies.userEmail;
+     const db = require('./database/models');
+     const usuario = db.Usuario;
+
+     usuario.findOne({ where: { email: req.cookies.userEmail } })
+      .then(function (usuarioEncontrado) {
+        if (usuarioEncontrado) {
+
+          req.session.usuarioLogueado = usuarioEncontrado;
+          res.locals.usuario = usuarioEncontrado;
+        }
+  
+        return next(); 
+     })
+    .catch(function (error) {
+        console.log("Error al buscar usuario por cookie:", error);
+        return next();
+      });
+  } else {
+    if (req.session.usuarioLogueado != undefined) {
+      res.locals.usuario = req.session.usuarioLogueado;
+    } else {
+      res.locals.usuario = null;
+    }
+    return next();
   }
-  return next(); 
 });
 
 //sistema de ruteo

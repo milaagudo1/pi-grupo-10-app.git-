@@ -19,29 +19,33 @@
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="<%= producto.imagen %>" alt="<%= producto.nombre %>" class="product-detail-img">
+					<img src="/images/products/<%= producto.imagen %>" alt="<%= producto.nombre %>" class="product-detail-img">
 					<p class="product-detail-description"><%= producto.descripcion %></p>
 				</article>
 				<div class="col-12 col-lg-4">
 					<section class="comments">
   <% for (let j = 0; j < producto.comentarios.length; j++) { %>
     <article>
-      <img src="/images/users/<%= producto.comentarios[j].imagenPerfil %>" 
-     alt="<%= producto.comentarios[j].nombreUsuario %>">
+      <img src="/images/users/default.png" 
+     alt="<%= producto.comentarios[j].usuario.usuario %>">
       <div class="data">
         <p class="user">
-          <strong><%= producto.comentarios[j].nombreUsuario %>:</strong> 
-          <%= producto.comentarios[j].texto %>
+          <strong><%= producto.comentarios[j].usuario.usuario %>:</strong> 
+          <%= producto.comentarios[j].comentario %>
         </p>
       </div>
     </article>
   <% } %>
 </section>
 					</section>
-					<form  action="" class="form" action="" method="GET">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+					<% if(locals.usuario) {%>
+					<form  action="/comentario/add" class="form" action="" method="POST">
+						<input class="form-input" type="text" name="comentario" placeholder="Agregar comentario">
+						<input type="hidden" name="usuario_id" value="<%= locals.usuario.id %>">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+						
 					</form>
+					<% } %>
 					<hr>
 				</div>
 			</div>

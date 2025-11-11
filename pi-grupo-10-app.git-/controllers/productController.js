@@ -9,46 +9,56 @@ const controladorProducto = {
         db.Producto.findByPk(productoId, {
             include: [
                 { model: db.Usuario, as: 'usuario' },
-                { model: db.Comentario, as: 'comentarios' }
+                {
+                    model: db.Comentario, as: 'comentarios',
+
+                    include: [
+                        {
+                            model: db.Usuario,
+                            as: 'usuario' // este alias debe coincidir con el definido en el modelo Comentario
+                        }]
+                }
             ]
         })
-        .then(function (producto) {
-            return res.render("productDetail", { producto });
+            .then(function (producto) {
+                res.locals.usuario = req.session.usuarioLogueado;
 
-        })
-        .catch(function (error) {
-            return res.send(error.message);
-        });
+                return res.render("productDetail", { producto });
+
+            })
+            .catch(function (error) {
+                return res.send(error.message);
+            });
     },
 
     results: function (req, res) {
         let busquedaUsuario = req.query.search;
-        
+
         if (busquedaUsuario == undefined) {
-        busquedaUsuario = "";
-    }
+            busquedaUsuario = "";
+        }
         db.Producto.findAll({
             where: {
-            nombre: { [Op.like]: '%' + busquedaUsuario + '%' } 
-        },
-        include: [{ model: db.Usuario, as: 'usuario' }] 
+                nombre: { [Op.like]: '%' + busquedaUsuario + '%' }
+            },
+            include: [{ model: db.Usuario, as: 'usuario' }]
 
         })
 
-        .then(function (productos) {
-            let mensaje = "";
+            .then(function (productos) {
+                let mensaje = "";
 
-            if (productos.length === 0) {
-                mensaje = `No se encontraron productos que coincidan con su búsqueda: ${busquedaUsuario}.`;
-            }
+                if (productos.length === 0) {
+                    mensaje = `No se encontraron productos que coincidan con su búsqueda: ${busquedaUsuario}.`;
+                }
 
 
-            return res.render("searchResults", { productos, mensaje });
+                return res.render("searchResults", { productos, mensaje });
 
-        })
-        .catch(function (error) {
-            return res.send(error.message);
-        });
+            })
+            .catch(function (error) {
+                return res.send(error.message);
+            });
     },
 
     add: function (req, res) {
@@ -59,37 +69,38 @@ const controladorProducto = {
     store: function (req, res) {
         let nombre = req.body.nombre;
         let descripcion = req.body.descripcion;
+        let urlImagen = req.body.imagen;
 
         db.Producto.create({
             nombre: nombre,
             descripcion: descripcion,
-            imagen: '/img/' + req.file.filename,
+            imagen: urlImagen,
             usuario_id: req.session.usuarioLogueado.id
         })
-        .then(function () {
-            res.locals.success = 'Producto creado';
-            return res.redirect('/products/add');
-        })
-        .catch(function (error) {
-            return res.send(error.message);
-        });
+            .then(function () {
+                res.locals.success = 'Producto creado';
+                return res.redirect('/products/add');
+            })
+            .catch(function (error) {
+                return res.send(error.message);
+            });
     },
 
     edit: function (req, res) {
         let id = req.params.id;
 
         db.Producto.findByPk(id)
-        .then(function (product) {
-            if (!product) {
-                return res.send("No existe un producto con ese ID");
-            }
+            .then(function (product) {
+                if (!product) {
+                    return res.send("No existe un producto con ese ID");
+                }
 
-            return res.render("product-edit", { product });
+                return res.render("product-edit", { product });
 
-        })
-        .catch(function (error) {
-            return res.send(error.message);
-        });
+            })
+            .catch(function (error) {
+                return res.send(error.message);
+            });
     }
 };
 

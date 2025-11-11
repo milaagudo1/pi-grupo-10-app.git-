@@ -13,6 +13,16 @@ const controladorUsuarios = {
         const logueado = true;
 
         db.Producto.findAll({
+            include: [
+                {
+                    model: db.Comentario,
+                    as: 'comentarios', // este alias debe coincidir con el definido en el modelo Comentario
+                    include: [{
+                        model: db.Usuario,
+                        as: 'usuario'
+                    }]
+                }
+            ],
             where: { usuario_id: usuarioLogueado.id }
         })
             .then(function (productos) {
